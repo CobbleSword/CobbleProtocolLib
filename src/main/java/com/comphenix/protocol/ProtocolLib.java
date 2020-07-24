@@ -18,7 +18,9 @@ package com.comphenix.protocol;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Field;
 import java.util.Set;
+import java.util.concurrent.ConcurrentMap;
 import java.util.logging.Handler;
 import java.util.logging.Level;
 import java.util.logging.LogRecord;
@@ -43,6 +45,7 @@ import com.google.common.base.Splitter;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
 
+import io.netty.util.AttributeKey;
 import org.bukkit.Server;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.PluginCommand;
@@ -627,6 +630,21 @@ public class ProtocolLib extends JavaPlugin {
 
 		// To clean up global parameters
 		reporter = new BasicErrorReporter();
+
+		// Reload protocol
+		try {
+			Class<AttributeKey> attributeKeyClass = AttributeKey.class;
+			Field namesField = attributeKeyClass.getDeclaredField("names");
+			namesField.setAccessible(true);
+			ConcurrentMap<String, Boolean> names = (ConcurrentMap<String, Boolean>)namesField.get((Object)null);
+			for (String name : names.keySet())
+			{
+				if (name.toLowerCase().startsWith("protocol"))
+					names.remove(name);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**

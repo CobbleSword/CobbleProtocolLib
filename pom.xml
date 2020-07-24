@@ -90,7 +90,7 @@
 							<Implementation-Vendor>dmulloy2</Implementation-Vendor>
 						</manifestEntries>
 					</archive>
-					<finalName>${project.name}</finalName>
+					<finalName>NachoProtocolLib</finalName>
 				</configuration>
 			</plugin>
 
