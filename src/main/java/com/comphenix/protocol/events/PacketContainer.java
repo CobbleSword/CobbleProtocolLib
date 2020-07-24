@@ -820,16 +820,6 @@ public class PacketContainer implements Serializable {
 			    EnumWrappers.getParticleConverter());
     }
 
-	/**
-	 * Retrieve a read/write structure for ParticleParams in 1.13
-	 * @return A modifier for ParticleParam fields.
-	 */
-	public StructureModifier<WrappedParticle> getNewParticles() {
-		return structureModifier.withType(
-				MinecraftReflection.getMinecraftClass("ParticleParam"),
-				BukkitConverters.getParticleConverter()
-		);
-    }
 
     /**
      * Retrieve a read/write structure for the MobEffectList class in 1.9.

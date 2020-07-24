@@ -53,7 +53,6 @@ import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.World;
 import org.bukkit.WorldType;
-import org.bukkit.advancement.Advancement;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.ItemStack;
@@ -61,8 +60,6 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.Vector;
 
-import static com.comphenix.protocol.utility.MinecraftReflection.getCraftBukkitClass;
-import static com.comphenix.protocol.utility.MinecraftReflection.getMinecraftClass;
 import static com.comphenix.protocol.wrappers.Converters.handle;
 import static com.comphenix.protocol.wrappers.Converters.ignoreNull;
 
@@ -978,35 +975,6 @@ public class BukkitConverters {
 				}
 
 				return soundIndex.get(key);
-			}
-		});
-	}
-
-	public static EquivalentConverter<WrappedParticle> getParticleConverter() {
-		return ignoreNull(handle(WrappedParticle::getHandle, WrappedParticle::fromHandle));
-	}
-
-	public static EquivalentConverter<Advancement> getAdvancementConverter() {
-		return ignoreNull(new EquivalentConverter<Advancement>() {
-			@Override
-			public Advancement getSpecific(Object generic) {
-				try {
-					return (Advancement) getCraftBukkitClass("advancement.CraftAdvancement")
-							.getConstructor(getMinecraftClass("Advancement"))
-							.newInstance(generic);
-				} catch (ReflectiveOperationException ex) {
-					throw new RuntimeException(ex);
-				}
-			}
-
-			@Override
-			public Object getGeneric(Advancement specific) {
-				return BukkitUnwrapper.getInstance().unwrapItem(specific);
-			}
-
-			@Override
-			public Class<Advancement> getSpecificType() {
-				return Advancement.class;
 			}
 		});
 	}

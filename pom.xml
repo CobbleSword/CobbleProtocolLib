@@ -17,7 +17,6 @@
 		<project.fullVersion>${project.version}</project.fullVersion>
 
 		<powermock.version>2.0.7</powermock.version>
-		<spigot.version>1.16.1-R0.1-SNAPSHOT</spigot.version>
 	</properties>
 
 	<build>
@@ -276,19 +275,13 @@
 		<dependency>
 			<groupId>io.netty</groupId>
 			<artifactId>netty-all</artifactId>
-			<version>4.0.23.Final</version>
+			<version>4.1.50.Final</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
-			<groupId>org.spigotmc</groupId>
-			<artifactId>spigot-api</artifactId>
-			<version>${spigot.version}</version>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.spigotmc</groupId>
-			<artifactId>spigot</artifactId>
-			<version>${spigot.version}</version>
+			<groupId>dev.cobblesword.nachospigot</groupId>
+			<artifactId>server</artifactId>
+			<version>1.8.8-R0.2-SNAPSHOT</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
